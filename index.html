@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Happy Birthday Bubu! ❤️</title>
+    <style>
+        body {
+            font-family: 'Comic Sans MS', cursive, sans-serif;
+            background: linear-gradient(45deg, #ff9a9e, #fad0c4);
+            margin: 0;
+            padding: 0;
+            text-align: center;
+            color: #333;
+            overflow-x: hidden;
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            position: relative;
+        }
+        
+        h1 {
+            color: #d23669;
+            font-size: 3em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            margin-bottom: 10px;
+        }
+        
+        .heart {
+            color: red;
+            font-size: 1.5em;
+            animation: pulse 1s infinite alternate;
+        }
+        
+        @keyframes pulse {
+            from { transform: scale(1); }
+            to { transform: scale(1.3); }
+        }
+        
+        .photo-frame {
+            width: 300px;
+            height: 300px;
+            margin: 20px auto;
+            border: 10px solid white;
+            border-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .photo-frame img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s;
+        }
+        
+        .photo-frame:hover img {
+            transform: scale(1.1);
+        }
+        
+        .message {
+            background-color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        button {
+            background-color: #d23669;
+            color: white;
+            border: none;
+            padding: 12px 25px;
+            font-size: 1.2em;
+            border-radius: 50px;
+            cursor: pointer;
+            margin: 10px;
+            transition: all 0.3s;
+            font-family: 'Comic Sans MS', cursive;
+        }
+        
+        button:hover {
+            background-color: #ff4757;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(210, 54, 105, 0.4);
+        }
+        
+        .step {
+            display: none;
+            animation: fadeIn 0.5s ease-out;
+        }
+        
+        .active-step {
+            display: block;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .confetti {
+            position: fixed;
+            width: 10px;
+            height: 10px;
+            background-color: #f00;
+            opacity: 0;
+            animation: confetti 5s ease-in-out infinite;
+        }
+        
+        @keyframes confetti {
+            0% { transform: translateY(0) rotate(0deg); opacity: 1; }
+            100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+        }
+        
+        .countdown {
+            font-size: 1.5em;
+            margin: 10px 0 20px;
+            color: #d23669;
+            font-weight: bold;
+        }
+        
+        .music-player {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: white;
+            padding: 10px;
+            border-radius: 50px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            z-index: 100;
+        }
+        
+        .nickname {
+            font-size: 1.8em;
+            color: #d23669;
+            font-weight: bold;
+            margin: 5px 0;
+        }
+        
+        .cake-container {
+            position: relative;
+            margin: 20px auto;
+            width: 200px;
+            height: 200px;
+        }
+        
+        .cake {
+            font-size: 5em;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .cake:hover {
+            transform: scale(1.1);
+        }
+        
+        .floating-hearts {
+            position: absolute;
+            font-size: 1.5em;
+            animation: float 3s ease-in-out infinite;
+            opacity: 0.7;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(10deg); }
+        }
+        
+        .polaroid {
+            background: white;
+            padding: 15px 15px 40px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.2);
+            transform: rotate(-5deg);
+            transition: all 0.3s;
+            display: inline-block;
+            margin: 20px;
+        }
+        
+        .polaroid:hover {
+            transform: rotate(0deg) scale(1.05);
+        }
+        
+        .polaroid img {
+            width: 250px;
+            height: 250px;
+            object-fit: cover;
+        }
+        
+        .polaroid-caption {
+            text-align: center;
+            font-family: 'Comic Sans MS', cursive;
+            margin-top: 10px;
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 10px;
+            background: #f8d7da;
+            border-radius: 5px;
+            margin: 20px 0;
+            overflow: hidden;
+        }
+        
+        .progress {
+            height: 100%;
+            background: #d23669;
+            width: 0%;
+            transition: width 0.5s;
+        }
+        
+        .step-indicator {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        .step-dot {
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            background: #f8d7da;
+            transition: all 0.3s;
+        }
+        
+        .step-dot.active {
+            background: #d23669;
+            transform: scale(1.2);
+        }
+        
+        .gift-box {
+            font-size: 5em;
+            cursor: pointer;
+            margin: 20px 0;
+            animation: bounce 2s infinite;
+        }
+        
+        @keyframes bounce {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        .hidden-gift {
+            display: none;
+            font-size: 2em;
+            margin: 20px 0;
+        }
+    </style>
+</head>
+<body>
+    <audio id="birthdaySong" autoplay loop>
+        <source src="audio.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <div class="music-player">
+        <button id="musicToggle">🔊 Music ON</button>
+    </div>
+    
+    <div class="container">
+        <!-- Step 1: Welcome -->
+        <div class="step active-step" id="step1">
+            <div class="nickname">To my dearest Bubu</div>
+            <h1>Happy Birthday! <span class="heart">❤️</span></h1>
+            
+            <div class="polaroid">
+                <img src="pic.png" alt="The most beautiful Bubu in the world">
+                <div class="polaroid-caption">My Beautiful Bubu</div>
+            </div>
+            
+            <div class="message">
+                <p>My sweet Bubu,</p>
+                <p>I've prepared something special for your birthday!</p>
+                <p>Click the button below to begin your birthday surprise...</p>
+            </div>
+            
+            <button id="startBtn">Start Birthday Adventure!</button>
+        </div>
+        
+        <!-- Step 2: Birthday Message -->
+        <div class="step" id="step2">
+            <h1>For You Bubu <span class="heart">❤️</span></h1>
+            
+            <div class="message">
+                <p>Dear Bubu,</p>
+                <p>On your special day, I want you to know how much you mean to me.</p>
+                <p>You're the most amazing person I know - kind, funny, beautiful, and perfect in every way.</p>
+                <p>Every moment with you is a gift I treasure.</p>
+                <p>Love always,</p>
+                <p>Your Dudu</p>
+            </div>
+            
+            <button class="next-btn">Next ➔</button>
+        </div>
+        
+        <!-- Step 3: Make a Wish -->
+        <div class="step" id="step3">
+            <h1>Make a Wish Bubu! <span class="heart">✨</span></h1>
+            
+            <div class="message">
+                <p>Close your eyes and make a birthday wish...</p>
+                <p>When you're ready, click the cake to blow out the candles!</p>
+            </div>
+            
+            <div class="cake-container">
+                <div class="cake" id="birthdayCake">🎂</div>
+                <div class="floating-hearts" style="left: 30%; top: -20px; animation-delay: 0s;">❤️</div>
+                <div class="floating-hearts" style="left: 70%; top: -10px; animation-delay: 0.5s;">💖</div>
+                <div class="floating-hearts" style="left: 50%; top: -30px; animation-delay: 1s;">💗</div>
+            </div>
+            
+            <p id="wishResult"></p>
+            
+            <button class="next-btn" id="wishNextBtn" style="display: none;">My Wish is Made! ➔</button>
+        </div>
+        
+        <!-- Step 4: Virtual Gift -->
+        <div class="step" id="step4">
+            <h1>A Gift For You <span class="heart">🎁</span></h1>
+            
+            <div class="message">
+                <p>I may not be able to give you this gift in person right now,</p>
+                <p>but I hope this virtual gift brings a smile to your face!</p>
+                <p>Click on the gift box to open it:</p>
+            </div>
+            
+            <div class="gift-box" id="giftBox">🎁</div>
+            
+            <div class="hidden-gift" id="hiddenGift">
+                <p>My gift to you is...</p>
+                <p style="font-size: 1.5em; color: #d23669;">A lifetime of love and happiness together!</p>
+                <p>Plus a real gift waiting for you in person! 😘</p>
+            </div>
+            
+            <button class="next-btn" id="giftNextBtn" style="display: none;">Continue ➔</button>
+        </div>
+        
+        <!-- Step 5: Final Surprise -->
+        <div class="step" id="step5">
+            <h1>One Last Surprise! <span class="heart">🎉</span></h1>
+            
+            <div class="message">
+                <p>Bubu, you're the best thing that ever happened to me.</p>
+                <p>Thank you for being you, and for letting me be your Dudu.</p>
+                <p>I hope you've enjoyed your virtual birthday celebration!</p>
+                <p>Now get ready for the real celebration when we're together!</p>
+            </div>
+            
+            <button id="finalSurpriseBtn">Click for Final Surprise!</button>
+            
+            <div id="finalSurprise" style="display: none; margin-top: 20px;">
+                <div style="font-size: 5em;">💐🎂🎉</div>
+                <p style="font-size: 1.5em; margin-top: 20px;">I LOVE YOU BUBU! HAPPY BIRTHDAY!</p>
+            </div>
+        </div>
+        
+        <div class="progress-bar">
+            <div class="progress" id="progressBar"></div>
+        </div>
+        
+        <div class="step-indicator">
+            <div class="step-dot active" data-step="1"></div>
+            <div class="step-dot" data-step="2"></div>
+            <div class="step-dot" data-step="3"></div>
+            <div class="step-dot" data-step="4"></div>
+            <div class="step-dot" data-step="5"></div>
+        </div>
+    </div>
+
+    <script>
+        // Auto-play music when page loads
+        window.onload = function() {
+            const audio = document.getElementById('birthdaySong');
+            audio.volume = 0.5; // Set volume to 50%
+            const playPromise = audio.play();
+            
+            if (playPromise !== undefined) {
+                playPromise.catch(error => {
+                    // Auto-play was prevented, show music button
+                    document.getElementById('musicToggle').textContent = "▶️ Play Music";
+                });
+            }
+        };
+        
+        // Music toggle
+        document.getElementById('musicToggle').addEventListener('click', function() {
+            const audio = document.getElementById('birthdaySong');
+            if (audio.paused) {
+                audio.play();
+                this.textContent = "🔊 Music ON";
+            } else {
+                audio.pause();
+                this.textContent = "🔈 Music OFF";
+            }
+        });
+        let currentStep = 1;
+        const totalSteps = 5;
+        
+        function updateProgress() {
+            const progress = (currentStep / totalSteps) * 100;
+            document.getElementById('progressBar').style.width = `${progress}%`;
+            
+            // Update step indicators
+            document.querySelectorAll('.step-dot').forEach((dot, index) => {
+                if (index < currentStep) {
+                    dot.classList.add('active');
+                } else {
+                    dot.classList.remove('active');
+                }
+            });
+        }
+        
+        function showStep(stepNumber) {
+            document.querySelectorAll('.step').forEach(step => {
+                step.classList.remove('active-step');
+            });
+            document.getElementById(`step${stepNumber}`).classList.add('active-step');
+            currentStep = stepNumber;
+            updateProgress();
+            
+            // Scroll to top of step
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            
+            // Special actions for certain steps
+            if (stepNumber === 5) {
+                createConfetti();
+            }
+        }
+        
+        // Start button
+        document.getElementById('startBtn').addEventListener('click', function() {
+            showStep(2);
+        });
+        
+        // Next buttons
+        document.querySelectorAll('.next-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                showStep(currentStep + 1);
+            });
+        });
+        
+        // Cake wish
+        document.getElementById('birthdayCake').addEventListener('click', function() {
+            this.textContent = "🍰";
+            document.getElementById('wishResult').innerHTML = "Your wish will come true Bubu! I love you! ❤️";
+            document.getElementById('wishNextBtn').style.display = "inline-block";
+            createConfetti();
+        });
+        
+        // Gift box
+        document.getElementById('giftBox').addEventListener('click', function() {
+            this.style.display = "none";
+            document.getElementById('hiddenGift').style.display = "block";
+            document.getElementById('giftNextBtn').style.display = "inline-block";
+            createConfetti();
+        });
+        
+        // Final surprise
+        document.getElementById('finalSurpriseBtn').addEventListener('click', function() {
+            this.style.display = "none";
+            document.getElementById('finalSurprise').style.display = "block";
+            createConfetti();
+            
+            // Create lots of floating hearts
+            for (let i = 0; i < 50; i++) {
+                createFloatingHeart();
+            }
+        });
+        
+        // Confetti effect
+        function createConfetti() {
+            const colors = ['#f00', '#0f0', '#00f', '#ff0', '#f0f', '#0ff'];
+            
+            for (let i = 0; i < 100; i++) {
+                const confetti = document.createElement('div');
+                confetti.className = 'confetti';
+                confetti.style.left = Math.random() * 100 + 'vw';
+                confetti.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)];
+                confetti.style.width = Math.random() * 10 + 5 + 'px';
+                confetti.style.height = Math.random() * 10 + 5 + 'px';
+                confetti.style.animationDelay = Math.random() * 5 + 's';
+                confetti.style.animationDuration = Math.random() * 3 + 2 + 's';
+                document.body.appendChild(confetti);
+                
+                setTimeout(() => {
+                    confetti.remove();
+                }, 5000);
+            }
+        }
+        
+        // Floating hearts
+        function createFloatingHeart() {
+            const heart = document.createElement('div');
+            heart.innerHTML = ['❤️', '💖', '💗', '💓', '💞'][Math.floor(Math.random() * 5)];
+            heart.className = 'floating-hearts';
+            heart.style.left = Math.random() * 80 + 10 + '%';
+            heart.style.top = Math.random() * 100 + 50 + 'px';
+            heart.style.animationDelay = Math.random() * 2 + 's';
+            heart.style.fontSize = Math.random() * 2 + 1 + 'em';
+            document.body.appendChild(heart);
+            
+            setTimeout(() => {
+                heart.remove();
+            }, 3000);
+        }
+    </script>
+</body>
+</html>
